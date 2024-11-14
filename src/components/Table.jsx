@@ -8,17 +8,18 @@ const Table = () => {
   return (
     <>
     <TableProvider>
-    <div className="mb-4 text-2xl font-semibold">Table</div>
-    <div className="overflow-x-auto">
-      <table className="min-w-full table-fixed border-collapse">
-        <thead className="bg-gray-200">
-          <CustomHeader  />
-        </thead>
-        <tbody>
-          <CustomRow  />
-        </tbody>
-      </table>
-    </div>
+    <div className="mb-4 text-2xl font-semibold">Assignment 1</div>
+    <div className="overflow-x-auto w-full">
+  <table className="border border-gray-300 min-w-full border-collapse table-auto">
+    <thead className="bg-gray-200">
+      <CustomHeader />
+    </thead>
+    <tbody>
+      <CustomRow />
+    </tbody>
+  </table>
+</div>
+
     </TableProvider>
     </>
   )

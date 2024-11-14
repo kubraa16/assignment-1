@@ -2,9 +2,9 @@ import React from 'react'
 
 const CustomCell = ({ data }) => {
   return (
-    <div className='py-4 text-sm break-words max-w-xs truncate'>
+    <td className='px-4 py-2 w-full border border-gray-300 truncate w-1/3'>
       {data}
-    </div>
+    </td>
   )
 }
 
