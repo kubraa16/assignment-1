@@ -1,6 +1,8 @@
 import React from 'react'
+import { useTableContext } from '../Context/TableContext'
 
-const CustomHeader = ({headers}) => {
+const CustomHeader = () => {
+    const {headers} = useTableContext();
   return (
     <div>
        
