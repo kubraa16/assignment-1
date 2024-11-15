@@ -13,6 +13,7 @@ const Table = () => {
   <table className="border border-gray-300 min-w-full border-collapse table-auto">
     <thead className="bg-gray-200">
       <CustomHeader />
+      
     </thead>
     <tbody>
       <CustomRow />

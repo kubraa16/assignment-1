@@ -9,10 +9,10 @@ export const TableProvider = ({ children }) => {
   const data = [
     { Company: "Alfreds Futterkiste", Contact: "Maria Anders", Country: "Germany" },
     { Company: "Centro Commercial Moezetuts", Contact: "Maria Anders", Country: "Germany" },
-    { Company: "Alfreds Futterkiste3", Contact: "Maria Anders", Country: "Germany" },
-    { Company: "Alfreds Futterkiste4", Contact: "Maria Anders", Country: "Germany" },
-    { Company: "Alfreds Futterkiste5", Contact: "Maria Anders", Country: "Germany" },
-    { Company: "Alfreds Futterkiste6", Contact: "Maria Anders", Country: "Germany" },
+    { Company: "Ernst hendel", Contact: "Francisco Chang", Country: "Mexico" },
+    { Company: "Island Trading", Contact: "Helen Bennett", Country: "UK" },
+    { Company: "Laughing Bacchus", Contact: "Yoshi Tannamuri", Country: "Canada" },
+    { Company: "Magazzini Alimentri ", Contact: "Giovanni Rovelli", Country: "Italy" },
   ];
 
   return (
