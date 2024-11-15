@@ -24,3 +24,4 @@ npm run dev
 ```
 The app will start in your browser at http://localhost:3000
 
+Deployed url https://kubra-assignment1.netlify.app/
