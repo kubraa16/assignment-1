@@ -7,6 +7,7 @@ import data from "../src/data/data.json";
 function App() {
   const dispatch = useDispatch();
   const { stocksData, loading, error } = useSelector((state) => state.stocks);
+  console.log(stocksData);
   console.log(data.top_gainers);
   useEffect(() => {
     dispatch(fetchStocksData());
