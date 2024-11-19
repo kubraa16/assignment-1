@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import StocksTable from "./components/StocksTable.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchStocksData } from "./features/stocksSlice.js";
+import { fetchStocksData } from "./store/reducers/stocksSlice.js";
 import data from "../src/data/data.json";
 function App() {
   const dispatch = useDispatch();
