@@ -9,9 +9,10 @@ function App() {
   const { stocksData, loading, error } = useSelector((state) => state.stocks);
   console.log(stocksData);
   console.log(data.top_gainers);
+
   useEffect(() => {
     dispatch(fetchStocksData());
-  }, [dispatch]);
+  }, []);
 
   if (loading) {
     return <h1>Loading...</h1>;
