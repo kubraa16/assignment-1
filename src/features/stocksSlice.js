@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-// const API_KEY = "L9AL5T7WX8QRVA87"
-const API_KEY = "YZO2U8T15VJ6PYWK";
+const API_KEY = import.meta.env.VITE_API_KEY;
+console.log(API_KEY);
 export const fetchStocksData = createAsyncThunk(
   "stocks/fetchStocksData",
   async () => {
