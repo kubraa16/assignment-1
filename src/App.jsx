@@ -4,11 +4,14 @@ import StocksTable from "./components/StocksTable.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStocksData } from "./store/reducers/stocksSlice.js";
 import data from "../src/data/data.json";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CompanyDetails from "./components/CompanyDetails.jsx";
 function App() {
   const dispatch = useDispatch();
-  const { stocksData, loading, error } = useSelector((state) => state.stocks);
-  console.log(stocksData);
-  console.log(data.top_gainers);
+  const { topGainers, topLosers, loading, error } = useSelector(
+    (state) => state.stocks
+  );
+  console.log(topGainers);
 
   useEffect(() => {
     dispatch(fetchStocksData());
@@ -22,12 +25,22 @@ function App() {
   }
 
   return (
-    <div>
-      <h2 className="text-lg font-bold py-3">Top Gainers</h2>
-      <StocksTable data={stocksData?.top_gainers} />
-      <h2 className="text-lg font-bold py-3">Top Loosers</h2>
-      <StocksTable data={stocksData?.top_losers} />
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <h2 className="text-lg font-bold py-3">Top Gainers</h2>
+              <StocksTable data={topGainers} />
+              <h2 className="text-lg font-bold py-3">Top Loosers</h2>
+              <StocksTable data={topLosers} />
+            </div>
+          }
+        />
+        <Route path="/company/:ticker" element={<CompanyDetails />} />
+      </Routes>
+    </Router>
   );
 }
 
