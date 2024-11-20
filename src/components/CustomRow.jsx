@@ -1,20 +1,30 @@
-import React from 'react'
-import CustomCell from './CustomCell'
-import { useTableContext } from '../Context/TableContext'
+import React from "react";
+import CustomCell from "./CustomCell";
+import data from "../data/data.json";
+import { useSelector } from "react-redux";
 
-const CustomRow = () => {
-    const {data , headers} = useTableContext();
+const CustomRow = ({ stockData }) => {
+  const { stocksData, loading, error } = useSelector((state) => state.stocks);
+  console.log(stocksData);
   return (
     <>
-         {data && data.map((row , rowIndex) => (
-                <tr className={` border-b border-gray-200 text-left w-full ${rowIndex % 2 === 0 ? "bg-white" : "bg-slate-200" }`} key={rowIndex}>
-                    {headers.map((header , colIndex) => (
-                        <CustomCell key={colIndex} data={row[header]}> </CustomCell>
-                    ))}
-                </tr>
-            ))} 
+      {stockData &&
+        stockData.slice(0, 10).map((row, rowIndex) => (
+          <tr
+            className={` border-b border-gray-200 text-left w-full ${
+              rowIndex % 2 === 0 ? "bg-white" : "bg-slate-200"
+            }`}
+            key={rowIndex}
+          >
+            {data.headers.map((header, colIndex) => (
+              <CustomCell key={colIndex} data={row[header]}>
+                {" "}
+              </CustomCell>
+            ))}
+          </tr>
+        ))}
     </>
-  )
-}
+  );
+};
 
-export default CustomRow
+export default CustomRow;
