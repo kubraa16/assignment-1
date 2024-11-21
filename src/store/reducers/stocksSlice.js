@@ -45,7 +45,6 @@ const stocksSlice = createSlice({
   },
 });
 
-// Async thunk to fetch stock data from API
 export const fetchStocksData = createAsyncThunk(
   "stocks/fetchStocksData",
   async (params, { dispatch, getState }) => {

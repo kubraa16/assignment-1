@@ -10,7 +10,6 @@ const CustomRow = ({ stockData }) => {
     <>
       {stockData &&
         stockData.slice(0, 10).map((row, rowIndex) => {
-          console.log(row);
           return (
             <tr
               className={`border-b border-gray-200 text-left w-full ${
