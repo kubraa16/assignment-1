@@ -4,7 +4,7 @@ import axios from "axios";
 const API_KEY = import.meta.VITE_API_KEY;
 
 const initialCompDetailsState = {
-  companyData: JSON.parse(localStorage.getItem("companies")) || {},
+  companies: {},
   loading: false,
   error: null,
 };
@@ -38,7 +38,6 @@ export const fetchCompanyData = createAsyncThunk(
       const response = await axios.get(
         `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${API_KEY}`
       );
-
       dispatch(setCompanyData({ ticker, data: response.data }));
       return { ticker, data: response.data };
     } catch (err) {
