@@ -6,12 +6,21 @@ import { fetchStocksData } from "./store/reducers/stocksSlice.js";
 import data from "../src/data/data.json";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CompanyDetails from "./components/CompanyDetails.jsx";
+import {
+  errorSelector,
+  gainersSelector,
+  loadingSelector,
+  losersSelecter,
+} from "./store/selectors/stocksSelector.js";
 function App() {
   const dispatch = useDispatch();
-  const { topGainers, topLosers, loading, error } = useSelector(
-    (state) => state.stocks
-  );
-  console.log(topGainers);
+  // const { topGainers, topLosers, loading, error } = useSelector(
+  //   (state) => state.stocks
+  // );
+  const topGainers = useSelector(gainersSelector);
+  const topLosers = useSelector(losersSelecter);
+  const loading = useSelector(loadingSelector);
+  const error = useSelector(errorSelector);
 
   useEffect(() => {
     dispatch(fetchStocksData());
