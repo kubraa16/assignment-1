@@ -1,11 +1,8 @@
 import React from "react";
 import CustomCell from "./CustomCell";
-import data from "../data/data.json";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import data from "../../../data/data.json";
 
 const CustomRow = ({ stockData }) => {
-  const { stocksData, loading, error } = useSelector((state) => state.stocks);
   return (
     <>
       {stockData &&
@@ -22,7 +19,7 @@ const CustomRow = ({ stockData }) => {
 
                 return (
                   <CustomCell
-                    key={colIndex}
+                    key="${colIndex}${rowIndex}"
                     data={value}
                     isTicker={header === "ticker"}
                   ></CustomCell>
