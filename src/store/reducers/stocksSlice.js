@@ -1,12 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
+const safeParse = (key) => {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : [];
+  } catch (error) {
+    console.error(`Error parsing ${key}:`, error);
+    return [];
+  }
+};
+
 const API_KEY = import.meta.env.VITE_API_KEY;
-console.log(API_KEY);
 
 const initialStockState = {
   stocksData: [],
-  topGainers: [],
-  topLosers: [],
+  topGainers: safeParse("topGainers"),
+  topLosers: safeParse("topLosers"),
   loading: false,
   error: null,
 };
@@ -23,9 +33,11 @@ const stocksSlice = createSlice({
     },
     setTopGainersData: (state, action) => {
       state.topGainers = action.payload;
+      localStorage.setItem("topGainers", JSON.stringify(action.payload));
     },
     setTopLosersData: (state, action) => {
       state.topLosers = action.payload;
+      localStorage.setItem("topLosers", JSON.stringify(action.payload));
     },
     setError: (state, action) => {
       state.error = action.payload;
@@ -35,16 +47,34 @@ const stocksSlice = createSlice({
 
 export const fetchStocksData = createAsyncThunk(
   "stocks/fetchStocksData",
-  async (params, { dispatch }) => {
-    const response = await axios.get(
-      `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${API_KEY}`
-    );
+  async (params, { dispatch, getState }) => {
+    try {
+      const state = getState();
+      if (
+        state.stocks.topGainers.length > 0 &&
+        state.stocks.topLosers.length > 0
+      ) {
+        return {
+          topGainers: state.stocks.topGainers,
+          topLosers: state.stocks.topLosers,
+        };
+      }
 
-    if (response) {
-      dispatch(setTopGainersData(response?.data?.top_gainers));
+      // `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${API_KEY}`
+      const response = await axios.get(
+        "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=demo"
+      );
+
+      if (response) {
+        dispatch(setTopGainersData(response?.data?.top_gainers || []));
+        dispatch(setTopLosersData(response?.data?.top_losers || []));
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      dispatch(setError("Error fetching data"));
     }
-
-    return response.data;
   }
 );
 
