@@ -7,11 +7,6 @@ export const categorySelector = createSelector(
   (state) => state.categories
 );
 
-// export const activeCategorySelector = (state) => {
-//   console.log("State in activeCategorySelector:", state);
-//   return state.activeCategory ? state.activeCategory : null;
-// };
-
 export const activeCategorySelector = createSelector(
   categoryStore,
   (state) => state.activeCategory

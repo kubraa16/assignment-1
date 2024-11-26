@@ -22,8 +22,6 @@ const CustomTab = () => {
     dispatch(fetchCategoryData());
   }, []);
 
-  console.log(activeCategory);
-
   if (loading) return <div>Loading categories...</div>;
   if (error) return <div>Error: {error}</div>;
 
