@@ -8,8 +8,10 @@ import {
 import { fetchCategoryProducts } from "../../../store/reducers/productByCategorySlice";
 import { activeCategorySelector } from "../../../store/selectors/productCategorySelector";
 import StocksTable from "../table/StockTable";
+import { useParams } from "react-router-dom";
 
 const ProductByCategoryList = () => {
+  const { category } = useParams();
   const dispatch = useDispatch();
   const products = useSelector(productBycategorySelector);
   const loading = useSelector(loadingSelector);

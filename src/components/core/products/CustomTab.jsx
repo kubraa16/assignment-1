@@ -15,6 +15,7 @@ import { TbEyeCancel, TbFlagCancel, TbPerfume } from "react-icons/tb";
 import { MdCancel, MdOutlineTableRestaurant } from "react-icons/md";
 import { FaCarrot } from "react-icons/fa";
 import { IoMdColorWand } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const buttonConfig = {
   beauty: { component: <GiLipstick size={20} />, color: "bg-pink-400" },
@@ -63,8 +64,11 @@ const CustomTab = () => {
               key={index}
               onClick={() => dispatch(setActiveCategory(item.slug))}
             >
-              {Icon}
-              {item.slug}
+              {" "}
+              <Link to={`/products/${item.slug}`}>
+                {Icon}
+                {item.slug}
+              </Link>
             </button>
           );
         })}
