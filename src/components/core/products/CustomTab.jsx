@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   activeCategorySelector,
@@ -10,6 +10,28 @@ import {
   fetchCategoryData,
   setActiveCategory,
 } from "../../../store/reducers/productCategoriesSlice";
+import { GiCancel, GiLipstick } from "react-icons/gi";
+import { TbEyeCancel, TbFlagCancel, TbPerfume } from "react-icons/tb";
+import { MdCancel, MdOutlineTableRestaurant } from "react-icons/md";
+import { FaCarrot } from "react-icons/fa";
+import { IoMdColorWand } from "react-icons/io";
+
+const buttonConfig = {
+  beauty: { component: <GiLipstick size={20} />, color: "bg-pink-400" },
+  fragrances: { component: <TbPerfume size={20} />, color: "bg-teal-400" },
+  furniture: {
+    component: <MdOutlineTableRestaurant size={20} />,
+    color: "bg-amber-400",
+  },
+  groceries: {
+    component: <FaCarrot size={20} />,
+    color: "bg-green-400",
+  },
+  "home-decoration": {
+    component: <IoMdColorWand size={20} />,
+    color: "bg-purple-400",
+  },
+};
 
 const CustomTab = () => {
   const dispatch = useDispatch();
@@ -28,19 +50,31 @@ const CustomTab = () => {
   return (
     <>
       <div className="flex flex-row gap-3">
-        {categories?.slice(0, 5).map((item, index) => (
-          <li
-            className={`list-none p-2 rounded-lg  text-l font-semibold cursor-pointer ${
-              item.slug === activeCategory
-                ? "bg-blue-700 text-white shadow-md"
-                : "bg-transparent"
-            }`}
-            key={index}
-            onClick={() => dispatch(setActiveCategory(item.slug))}
-          >
-            {item.slug}
-          </li>
-        ))}
+        {categories?.slice(0, 5).map((item, index) => {
+          const { component: Icon, color } = buttonConfig[item.slug] || {};
+
+          return (
+            <button
+              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex ${
+                item.slug === activeCategory
+                  ? "bg-blue-700 text-white shadow-md"
+                  : "bg-transparent"
+              } ${color}`}
+              key={index}
+              onClick={() => dispatch(setActiveCategory(item.slug))}
+            >
+              {Icon}
+              {item.slug}
+            </button>
+          );
+        })}
+        <button
+          className="list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex bg-red-400 hover:bg-red-600"
+          onClick={() => dispatch(setActiveCategory(null))}
+        >
+          <MdCancel size={20} />
+          Cancel
+        </button>
       </div>
     </>
   );

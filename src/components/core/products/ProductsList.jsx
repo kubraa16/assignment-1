@@ -54,12 +54,6 @@ const ProductsList = () => {
   return (
     <div className="p-3 h-1/3 overflow-auto">
       {products.length > 0 ? (
-        // products.map((item, index) => (
-        //   <div className="mb-5 p-2 border border-black" key={index}>
-        //     <h3>{item.title}</h3>
-        //     <p>{item.description}</p>
-        //   </div>
-        // ))
         <StockTable data={products} isProducts={true} />
       ) : (
         <div>No products found.</div>
