@@ -2,11 +2,11 @@ import React from "react";
 import CustomCell from "./CustomCell";
 import data from "../../../data/data.json";
 
-const CustomRow = ({ stockData }) => {
+const CustomRow = ({ stockData, isProducts }) => {
   return (
     <>
       {stockData &&
-        stockData.slice(0, 10).map((row, rowIndex) => {
+        stockData.map((row, rowIndex) => {
           return (
             <tr
               className={`border-b border-gray-200 text-left w-full ${
@@ -14,17 +14,30 @@ const CustomRow = ({ stockData }) => {
               }`}
               key={rowIndex}
             >
-              {data.headers.map((header, colIndex) => {
-                const value = row[header];
+              {!isProducts &&
+                data.headers.map((header, colIndex) => {
+                  const value = row[header];
 
-                return (
-                  <CustomCell
-                    key="${colIndex}${rowIndex}"
-                    data={value}
-                    isTicker={header === "ticker"}
-                  ></CustomCell>
-                );
-              })}
+                  return (
+                    <CustomCell
+                      key="${colIndex}${rowIndex}"
+                      data={value}
+                      isTicker={header === "ticker"}
+                    ></CustomCell>
+                  );
+                })}
+              {isProducts &&
+                data.ProductHeaders.map((header, colIndex) => {
+                  const value = row[header];
+
+                  return (
+                    <CustomCell
+                      key={colIndex}
+                      data={value}
+                      isTicker={header === "ticker"}
+                    ></CustomCell>
+                  );
+                })}
             </tr>
           );
         })}

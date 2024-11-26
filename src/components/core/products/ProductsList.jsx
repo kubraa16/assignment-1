@@ -11,6 +11,7 @@ import {
   fetchProductsData,
   setPage,
 } from "../../../store/reducers/productSlice";
+import StockTable from "../table/StockTable";
 
 const ProductsList = () => {
   const dispatch = useDispatch();
@@ -50,21 +51,19 @@ const ProductsList = () => {
     };
   }, [hasMore, loading, page]);
 
-  console.log(products);
-
   return (
     <div className="p-3 h-1/3 overflow-auto">
       {products.length > 0 ? (
-        products.map((item, index) => (
-          <div className="mb-5 p-2 border border-black" key={index}>
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-          </div>
-        ))
+        // products.map((item, index) => (
+        //   <div className="mb-5 p-2 border border-black" key={index}>
+        //     <h3>{item.title}</h3>
+        //     <p>{item.description}</p>
+        //   </div>
+        // ))
+        <StockTable data={products} isProducts={true} />
       ) : (
         <div>No products found.</div>
       )}
-
       {hasMore && (
         <div
           ref={lastElementRef}

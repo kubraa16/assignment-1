@@ -8,6 +8,7 @@
     "change_percentage",
     "volume"
   ],
+  "ProductHeaders": ["title", "category", "price", "rating", "stock"],
   "top_gainers": [
     {
       "ticker": "AREN",

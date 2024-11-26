@@ -32,7 +32,7 @@ export const fetchCategoryProducts = createAsyncThunk(
         `https://dummyjson.com/products/category/${category}`
       );
 
-      dispatch(setCategoryProductsData(response.data));
+      dispatch(setCategoryProductsData(response.data.products));
       return response.data;
     } catch (err) {
       console.log(err);

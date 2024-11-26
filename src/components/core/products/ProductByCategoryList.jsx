@@ -7,6 +7,7 @@ import {
 } from "../../../store/selectors/productByCategorySelector";
 import { fetchCategoryProducts } from "../../../store/reducers/productByCategorySlice";
 import { activeCategorySelector } from "../../../store/selectors/productCategorySelector";
+import StocksTable from "../table/StockTable";
 
 const ProductByCategoryList = () => {
   const dispatch = useDispatch();
@@ -17,10 +18,17 @@ const ProductByCategoryList = () => {
 
   useEffect(() => {
     dispatch(fetchCategoryProducts(selectedCategory));
-  }, []);
+  }, [selectedCategory]);
 
-  console.log(products);
-  return <div>ProductByCategoryList</div>;
+  return (
+    <>
+      {products.length > 0 ? (
+        <StocksTable data={products} isProducts={true} />
+      ) : (
+        <div>No products found.</div>
+      )}
+    </>
+  );
 };
 
 export default ProductByCategoryList;
