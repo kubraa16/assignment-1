@@ -15,7 +15,7 @@ import { TbEyeCancel, TbFlagCancel, TbPerfume } from "react-icons/tb";
 import { MdCancel, MdOutlineTableRestaurant } from "react-icons/md";
 import { FaCarrot } from "react-icons/fa";
 import { IoMdColorWand } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const buttonConfig = {
   beauty: { component: <GiLipstick size={20} />, color: "bg-pink-400" },
@@ -36,6 +36,7 @@ const buttonConfig = {
 
 const CustomTab = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const activeCategory = useSelector(activeCategorySelector);
   const categories = useSelector(categorySelector);
   const loading = useSelector(loadingSelector);
@@ -44,6 +45,11 @@ const CustomTab = () => {
   useEffect(() => {
     dispatch(fetchCategoryData());
   }, []);
+
+  function resetCategory() {
+    dispatch(setActiveCategory(null));
+    navigate("/");
+  }
 
   if (loading) return <div>Loading categories...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -56,11 +62,7 @@ const CustomTab = () => {
 
           return (
             <button
-              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex ${
-                item.slug === activeCategory
-                  ? "bg-blue-700 text-white shadow-md"
-                  : "bg-transparent"
-              } ${color}`}
+              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex ${color}`}
               key={index}
               onClick={() => dispatch(setActiveCategory(item.slug))}
             >
@@ -74,7 +76,7 @@ const CustomTab = () => {
         })}
         <button
           className="list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex bg-red-400 hover:bg-red-600"
-          onClick={() => dispatch(setActiveCategory(null))}
+          onClick={() => resetCategory()}
         >
           <MdCancel size={20} />
           Cancel
