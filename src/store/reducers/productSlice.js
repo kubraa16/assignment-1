@@ -4,7 +4,7 @@ import axios from "axios";
 const initialProductState = {
   products: [],
   page: 1,
-  limit: 10,
+  limit: 15,
   hasMore: true,
   loading: false,
   error: null,

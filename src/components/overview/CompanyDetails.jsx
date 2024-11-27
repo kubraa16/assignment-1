@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCompanyData } from "../../../store/reducers/compDetailsSlice";
+import { fetchCompanyData } from "../../store/reducers/compDetailsSlice";
 import { useParams } from "react-router-dom";
 import IncomeChart from "./IncomeChart";
 import {
   detailsSelector,
   errorSelector,
   loadingSelector,
-} from "../../../store/selectors/detailsSelector";
+} from "../../store/selectors/detailsSelector";
 import DetailRow from "./DetailRow";
 import DetailGrid from "./DetailGrid";
 

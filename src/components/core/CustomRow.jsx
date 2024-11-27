@@ -1,12 +1,12 @@
 import React from "react";
 import CustomCell from "./CustomCell";
-import data from "../../../data/data.json";
+import data from "../../data/data.json";
 
-const CustomRow = ({ stockData, isProducts }) => {
+const CustomRow = ({ datas, isProducts }) => {
   return (
     <>
-      {stockData &&
-        stockData.map((row, rowIndex) => {
+      {datas &&
+        datas.map((row, rowIndex) => {
           return (
             <tr
               className={`border-b border-gray-200 text-left w-full ${

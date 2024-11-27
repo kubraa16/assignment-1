@@ -6,12 +6,9 @@ import {
   loadingSelector,
   pageSelector,
   productSelector,
-} from "../../../store/selectors/productSelector";
-import {
-  fetchProductsData,
-  setPage,
-} from "../../../store/reducers/productSlice";
-import StockTable from "../table/StockTable";
+} from "../../store/selectors/productSelector";
+import { fetchProductsData, setPage } from "../../store/reducers/productSlice";
+import CustomTable from "../core/CustomTable";
 
 const ProductsList = () => {
   const dispatch = useDispatch();
@@ -40,7 +37,7 @@ const ProductsList = () => {
           dispatch(setPage(page + 1));
         }
       },
-      { rootMargin: "100px" }
+      { threshold: 1.0 }
     );
 
     if (lastElementRef.current) {
@@ -54,7 +51,7 @@ const ProductsList = () => {
   return (
     <div className="p-3 h-1/3 overflow-auto">
       {products.length > 0 ? (
-        <StockTable data={products} isProducts={true} />
+        <CustomTable data={products} isProducts={true} />
       ) : (
         <div>No products found.</div>
       )}

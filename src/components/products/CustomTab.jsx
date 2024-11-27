@@ -5,17 +5,17 @@ import {
   categorySelector,
   errorselector,
   loadingSelector,
-} from "../../../store/selectors/productCategorySelector";
+} from "../../store/selectors/productCategorySelector";
 import {
   fetchCategoryData,
   setActiveCategory,
-} from "../../../store/reducers/productCategoriesSlice";
-import { GiCancel, GiLipstick } from "react-icons/gi";
-import { TbEyeCancel, TbFlagCancel, TbPerfume } from "react-icons/tb";
+} from "../../store/reducers/productCategoriesSlice";
+import { GiLipstick } from "react-icons/gi";
+import { TbPerfume } from "react-icons/tb";
 import { MdCancel, MdOutlineTableRestaurant } from "react-icons/md";
 import { FaCarrot } from "react-icons/fa";
 import { IoMdColorWand } from "react-icons/io";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const buttonConfig = {
   beauty: { component: <GiLipstick size={20} />, color: "bg-pink-400" },
@@ -37,7 +37,6 @@ const buttonConfig = {
 const CustomTab = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const activeCategory = useSelector(activeCategorySelector);
   const categories = useSelector(categorySelector);
   const loading = useSelector(loadingSelector);
   const error = useSelector(errorselector);
@@ -48,7 +47,7 @@ const CustomTab = () => {
 
   function resetCategory() {
     dispatch(setActiveCategory(null));
-    navigate("/");
+    navigate("/products");
   }
 
   if (loading) return <div>Loading categories...</div>;
@@ -62,11 +61,10 @@ const CustomTab = () => {
 
           return (
             <button
-              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex ${color}`}
+              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex flex-row ${color}`}
               key={index}
               onClick={() => dispatch(setActiveCategory(item.slug))}
             >
-              {" "}
               <Link to={`/products/${item.slug}`}>
                 {Icon}
                 {item.slug}

@@ -4,10 +4,10 @@ import {
   errorSelector,
   loadingSelector,
   productBycategorySelector,
-} from "../../../store/selectors/productByCategorySelector";
-import { fetchCategoryProducts } from "../../../store/reducers/productByCategorySlice";
-import { activeCategorySelector } from "../../../store/selectors/productCategorySelector";
-import StocksTable from "../table/StockTable";
+} from "../../store/selectors/productByCategorySelector";
+import { fetchCategoryProducts } from "../../store/reducers/productByCategorySlice";
+import { activeCategorySelector } from "../../store/selectors/productCategorySelector";
+import CustomTable from "../core/CustomTable";
 import { useParams } from "react-router-dom";
 
 const ProductByCategoryList = () => {
@@ -25,7 +25,7 @@ const ProductByCategoryList = () => {
   return (
     <>
       {products.length > 0 ? (
-        <StocksTable data={products} isProducts={true} />
+        <CustomTable data={products} isProducts={true} />
       ) : (
         <div>No products found.</div>
       )}

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CustomRow from "./CustomRow";
-import header from "../../../data/data.json";
-const StocksTable = ({ data, isProducts }) => {
+import header from "../../data/data.json";
+const CustomTable = ({ data, isProducts }) => {
   return (
     <>
       <table>
@@ -27,11 +27,11 @@ const StocksTable = ({ data, isProducts }) => {
           </tr>
         </thead>
         <tbody>
-          <CustomRow stockData={data} isProducts={isProducts} />
+          <CustomRow datas={data} isProducts={isProducts} />
         </tbody>
       </table>
     </>
   );
 };
 
-export default StocksTable;
+export default CustomTable;
