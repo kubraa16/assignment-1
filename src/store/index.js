@@ -3,6 +3,9 @@ import { persistStore, persistReducer } from "redux-persist";
 import stocksReducer from "./reducers/stocksSlice";
 import companyDetailsReducer from "./reducers/compDetailsSlice";
 import incomeReducer from "./reducers/compIncomeSlice";
+import categoryReducer from "./reducers/productCategoriesSlice";
+import productsReducer from "./reducers/productSlice";
+import categoryProductReducer from "./reducers/productByCategorySlice";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
@@ -35,6 +38,9 @@ export const store = configureStore({
     stocks: persistedReducer,
     compDetails: persistedCompanyDetailsReducer,
     incomeDetails: persistIncomeReducer,
+    category: categoryReducer, // Persistent data storage is not required for this API
+    products: productsReducer,
+    categoryProduct: categoryProductReducer,
   },
 });
 

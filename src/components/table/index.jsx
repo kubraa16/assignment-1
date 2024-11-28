@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import StocksTable from "./StockTable";
+import CustomTable from "../core/CustomTable";
 import { useDispatch, useSelector } from "react-redux";
 import {
   errorSelector,
   gainersSelector,
   loadingSelector,
   losersSelecter,
-} from "../../../store/selectors/stocksSelector";
-import { fetchStocksData } from "../../../store/reducers/stocksSlice";
+} from "../../store/selectors/stocksSelector";
+import { fetchStocksData } from "../../store/reducers/stocksSlice";
 
 const IndexTable = () => {
   const dispatch = useDispatch();
@@ -29,9 +29,9 @@ const IndexTable = () => {
   return (
     <div>
       <h2 className="text-lg font-bold py-3">Top Gainers</h2>
-      <StocksTable data={topGainers} />
+      <CustomTable data={topGainers} />
       <h2 className="text-lg font-bold py-3">Top Loosers</h2>
-      <StocksTable data={topLosers} />
+      <CustomTable data={topLosers} />
     </div>
   );
 };

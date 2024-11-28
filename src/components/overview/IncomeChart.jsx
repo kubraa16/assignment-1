@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchIncomeData } from "../../../store/reducers/compIncomeSlice";
+import { fetchIncomeData } from "../../store/reducers/compIncomeSlice";
 import {
   incomeSelector,
   loadingSelector,
-} from "../../../store/selectors/incomeSelector";
+} from "../../store/selectors/incomeSelector";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 
