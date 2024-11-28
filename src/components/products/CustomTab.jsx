@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   activeCategorySelector,
@@ -43,7 +43,12 @@ const CustomTab = () => {
 
   useEffect(() => {
     dispatch(fetchCategoryData());
-  }, []);
+  }, [dispatch]);
+
+  const handleCategorySelect = (categorySlug) => {
+    dispatch(setActiveCategory(categorySlug));
+    navigate(`/product?category=${categorySlug}`);
+  };
 
   function resetCategory() {
     dispatch(setActiveCategory(null));
@@ -61,20 +66,18 @@ const CustomTab = () => {
 
           return (
             <button
-              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex flex-row ${color}`}
               key={index}
-              onClick={() => dispatch(setActiveCategory(item.slug))}
+              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex flex-row ${color}`}
+              onClick={() => handleCategorySelect(item.slug)}
             >
-              <Link to={`/products/${item.slug}`}>
-                {Icon}
-                {item.slug}
-              </Link>
+              {Icon}
+              {item.slug}
             </button>
           );
         })}
         <button
           className="list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex bg-red-400 hover:bg-red-600"
-          onClick={() => resetCategory()}
+          onClick={resetCategory}
         >
           <MdCancel size={20} />
           Cancel

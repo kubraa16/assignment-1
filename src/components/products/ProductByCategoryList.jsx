@@ -6,25 +6,32 @@ import {
   productBycategorySelector,
 } from "../../store/selectors/productByCategorySelector";
 import { fetchCategoryProducts } from "../../store/reducers/productByCategorySlice";
-import { activeCategorySelector } from "../../store/selectors/productCategorySelector";
+import { useSearchParams } from "react-router-dom";
+import { setActiveCategory } from "../../store/reducers/productCategoriesSlice";
 import CustomTable from "../core/CustomTable";
-import { useParams } from "react-router-dom";
 
 const ProductByCategoryList = () => {
-  const { category } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("category");
+
   const dispatch = useDispatch();
   const products = useSelector(productBycategorySelector);
   const loading = useSelector(loadingSelector);
   const error = useSelector(errorSelector);
-  const selectedCategory = useSelector(activeCategorySelector);
 
   useEffect(() => {
-    dispatch(fetchCategoryProducts(selectedCategory));
-  }, [selectedCategory]);
+    if (category) {
+      dispatch(setActiveCategory(category));
+      dispatch(fetchCategoryProducts(category));
+    }
+  }, [category, dispatch]);
+
+  if (loading) return <div>Loading products...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <>
-      {products.length > 0 ? (
+      {products?.length > 0 ? (
         <CustomTable data={products} isProducts={true} />
       ) : (
         <div>No products found.</div>
