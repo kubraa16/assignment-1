@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  activeCategorySelector,
   categorySelector,
   errorselector,
   loadingSelector,
@@ -15,7 +14,8 @@ import { TbPerfume } from "react-icons/tb";
 import { MdCancel, MdOutlineTableRestaurant } from "react-icons/md";
 import { FaCarrot } from "react-icons/fa";
 import { IoMdColorWand } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { setInitialProductState } from "../../store/reducers/productSlice";
+import { useSearchParams } from "react-router-dom";
 
 const buttonConfig = {
   beauty: { component: <GiLipstick size={20} />, color: "bg-pink-400" },
@@ -36,10 +36,11 @@ const buttonConfig = {
 
 const CustomTab = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const categories = useSelector(categorySelector);
   const loading = useSelector(loadingSelector);
   const error = useSelector(errorselector);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     dispatch(fetchCategoryData());
@@ -47,12 +48,16 @@ const CustomTab = () => {
 
   const handleCategorySelect = (categorySlug) => {
     dispatch(setActiveCategory(categorySlug));
-    navigate(`/product?category=${categorySlug}`);
+
+    setSearchParams({ category: categorySlug });
+    dispatch(setInitialProductState());
   };
 
+  const currentCategory = searchParams.get("category");
+
   function resetCategory() {
-    dispatch(setActiveCategory(null));
-    navigate("/products");
+    setSearchParams({});
+    dispatch(setInitialProductState());
   }
 
   if (loading) return <div>Loading categories...</div>;
@@ -63,11 +68,13 @@ const CustomTab = () => {
       <div className="flex flex-row gap-3">
         {categories?.slice(0, 5).map((item, index) => {
           const { component: Icon, color } = buttonConfig[item.slug] || {};
-
+          const isActive = currentCategory === item.slug;
           return (
             <button
               key={index}
-              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex flex-row ${color}`}
+              className={`list-none gap-1 items-center p-2 rounded-lg text-l font-semibold cursor-pointer flex flex-row ${color} ${
+                isActive ? "bg-blue-500" : ""
+              }`}
               onClick={() => handleCategorySelect(item.slug)}
             >
               {Icon}
