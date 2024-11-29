@@ -5,10 +5,7 @@ import {
   errorselector,
   loadingSelector,
 } from "../../store/selectors/productCategorySelector";
-import {
-  fetchCategoryData,
-  setActiveCategory,
-} from "../../store/reducers/productCategoriesSlice";
+import { fetchCategoryData } from "../../store/reducers/productCategoriesSlice";
 import { GiLipstick } from "react-icons/gi";
 import { TbPerfume } from "react-icons/tb";
 import { MdCancel, MdOutlineTableRestaurant } from "react-icons/md";
@@ -44,11 +41,9 @@ const CustomTab = () => {
 
   useEffect(() => {
     dispatch(fetchCategoryData());
-  }, [dispatch]);
+  }, []);
 
   const handleCategorySelect = (categorySlug) => {
-    dispatch(setActiveCategory(categorySlug));
-
     setSearchParams({ category: categorySlug });
     dispatch(setInitialProductState());
   };

@@ -57,9 +57,8 @@ export const fetchProductsData = createAsyncThunk(
 
     try {
       dispatch(setLoading(true));
-      let response;
 
-      response = await axios.get(
+      const response = await axios.get(
         `https://dummyjson.com/products?skip=${skip}&limit=${limit}`
       );
 
