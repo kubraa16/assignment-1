@@ -19,7 +19,7 @@ const IncomeChart = () => {
     if (!incomeDetails[ticker]) {
       dispatch(fetchIncomeData(ticker));
     }
-  }, [ticker, dispatch, incomeDetails]);
+  }, [ticker, incomeDetails]);
 
   if (loading) {
     return <h2>Loading...</h2>;

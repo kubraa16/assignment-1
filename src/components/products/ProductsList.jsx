@@ -1,31 +1,44 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  errorselector,
   hasMoreSelector,
+  limitSelector,
   loadingSelector,
   pageSelector,
   productSelector,
 } from "../../store/selectors/productSelector";
-import { fetchProductsData, setPage } from "../../store/reducers/productSlice";
+import {
+  fetchProductsData,
+  setPage,
+  fetchCategoryProducts,
+} from "../../store/reducers/productSlice";
 import CustomTable from "../core/CustomTable";
+import { useSearchParams } from "react-router-dom";
 
 const ProductsList = () => {
   const dispatch = useDispatch();
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const products = useSelector(productSelector);
   const page = useSelector(pageSelector);
+  const limit = useSelector(limitSelector);
   const hasMore = useSelector(hasMoreSelector);
   const loading = useSelector(loadingSelector);
-  const error = useSelector(errorselector);
 
+  const category = searchParams.get("category");
   const observer = useRef(null);
   const lastElementRef = useRef();
 
   useEffect(() => {
-    if (page === 1 || hasMore) {
-      dispatch(fetchProductsData());
+    if (!category)
+      dispatch(fetchProductsData({ page, limit, skip: (page - 1) * limit }));
+  }, [category, page, hasMore]);
+
+  useEffect(() => {
+    if (category) {
+      dispatch(fetchCategoryProducts(category));
     }
-  }, [page, hasMore]);
+  }, [category]);
 
   useEffect(() => {
     if (observer.current) observer.current.disconnect();

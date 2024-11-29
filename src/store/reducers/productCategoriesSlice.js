@@ -3,7 +3,6 @@ import axios from "axios";
 
 const initialCategoryState = {
   categories: [],
-  activeCategory: null,
   loading: false,
   error: null,
 };
@@ -18,9 +17,6 @@ const categoriesSlice = createSlice({
     setCategoryData: (state, action) => {
       state.loading = false;
       state.categories = action.payload;
-    },
-    setActiveCategory: (state, action) => {
-      state.activeCategory = action.payload;
     },
     setError: (state, action) => {
       state.error = action.payload;
@@ -43,6 +39,6 @@ export const fetchCategoryData = createAsyncThunk(
   }
 );
 
-export const { setLoading, setCategoryData, setActiveCategory, setError } =
+export const { setLoading, setCategoryData, setError } =
   categoriesSlice.actions;
 export default categoriesSlice.reducer;

@@ -7,6 +7,11 @@ export const productSelector = createSelector(
   (state) => state.products
 );
 
+export const categorySelector = createSelector(
+  productStore,
+  (state) => state.category
+);
+
 export const pageSelector = createSelector(productStore, (state) => state.page);
 
 export const limitSelector = createSelector(

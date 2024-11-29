@@ -7,11 +7,6 @@ export const categorySelector = createSelector(
   (state) => state.categories
 );
 
-export const activeCategorySelector = createSelector(
-  categoryStore,
-  (state) => state.activeCategory
-);
-
 export const loadingSelector = createSelector(
   categoryStore,
   (state) => state.loading
