@@ -37,6 +37,10 @@ const buttonConfig = {
 
 const CustomTab = () => {
   const dispatch = useDispatch();
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
+
   const categories = useSelector(categorySelector);
   const loading = useSelector(loadingSelector);
   const error = useSelector(errorselector);
@@ -90,9 +94,6 @@ const CustomTab = () => {
 
   if (loading) return <div>Loading categories...</div>;
   if (error) return <div>Error: {error}</div>;
-
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({});
 
   const handleClick = () => {
     setModalOpen(true);

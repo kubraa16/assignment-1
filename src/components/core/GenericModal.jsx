@@ -17,14 +17,13 @@ const GenericModal = ({
     formData.forEach((value, key) => {
       data[key] = value;
     });
-    console.log("Changed Data : ", data);
     onSubmit(data);
   };
-
   const renderInput = (input) => {
     const [inputValue, setInputValue] = useState(
       (currentData && currentData[input.key]) || ""
     );
+
     switch (input.type) {
       case "select":
         return (

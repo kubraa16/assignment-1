@@ -15,7 +15,6 @@ const CustomTable = ({ data, header }) => {
               rowIndex={rowIndex}
             />
           ))}
-          <CustomRow data={data} header={header} />
         </tbody>
       </table>
     </>

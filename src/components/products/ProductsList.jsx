@@ -22,6 +22,8 @@ import { ProductHeaders } from "../../data/data.json";
 
 const ProductsList = () => {
   const dispatch = useDispatch();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
 
   const categories = useSelector(categorySelector);
 
@@ -35,6 +37,8 @@ const ProductsList = () => {
   const category = searchParams.get("category");
   const observer = useRef(null);
   const lastElementRef = useRef();
+
+  console.log(products);
 
   useEffect(() => {
     dispatch(fetchCategoryData());
@@ -71,9 +75,6 @@ const ProductsList = () => {
       if (observer.current) observer.current.disconnect();
     };
   }, [hasMore, loading, page]);
-
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({});
 
   const inputs = [
     {
