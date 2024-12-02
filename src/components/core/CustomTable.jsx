@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CustomRow from "./CustomRow";
 import CustomHeader from "./CustomHeader";
 const CustomTable = ({ data, header }) => {
