@@ -49,6 +49,7 @@ const productsSlice = createSlice({
     },
   },
 });
+
 const updateProductList = (data, dispatch, getState) => {
   const state = getState();
   const currProducts = [...state.products.products];

@@ -38,7 +38,6 @@ const ProductsList = () => {
   const observer = useRef(null);
   const lastElementRef = useRef();
 
-  console.log(products);
 
   useEffect(() => {
     dispatch(fetchCategoryData());
@@ -102,6 +101,7 @@ const ProductsList = () => {
       key: "stock",
       label: "Stock",
       type: "number",
+      required: true,
     },
   ];
 

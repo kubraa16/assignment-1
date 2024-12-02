@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const GenericModal = ({
   isOpen,
@@ -20,17 +20,14 @@ const GenericModal = ({
     onSubmit(data);
   };
   const renderInput = (input) => {
-    const [inputValue, setInputValue] = useState(
-      (currentData && currentData[input.key]) || ""
-    );
+    const inputValue = (currentData && currentData[input.key]) || "";
 
     switch (input.type) {
       case "select":
         return (
           <select
             name={input.key}
-            onChange={(event) => setInputValue(event.target.value)}
-            value={inputValue}
+            defaultValue={inputValue}
             required={input.required}
             className="border border-gray-300 focus:border-blue-400 focus:ring focus:ring-blue-400 focus:ring-opacity-50 rounded-md shadow-sm p-2 text-sm"
           >
@@ -48,8 +45,7 @@ const GenericModal = ({
           <input
             type={input.type}
             name={input.key}
-            onChange={(event) => setInputValue(event.target.value)}
-            value={inputValue}
+            defaultValue={inputValue}
             required={input.required}
             placeholder={input.placeholder || ""}
             disabled={input.disabled}
@@ -76,7 +72,7 @@ const GenericModal = ({
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           {inputs.map((input, index) => (
             <div key={index} className="flex flex-col">
-              <label className="mb-2 text-sm font-medium text-left font-bold text-gray-900">
+              <label className="mb-2 text-sm font-medium text-left  text-gray-900">
                 {input.label}
               </label>
               {renderInput(input)}
