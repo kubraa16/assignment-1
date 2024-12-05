@@ -5,7 +5,6 @@ import {
   errorselector,
   loadingSelector,
 } from "../../store/selectors/productCategorySelector";
-import GenericModal from "../core/GenericModal";
 import { fetchCategoryData } from "../../store/reducers/productCategoriesSlice";
 import { GiLipstick } from "react-icons/gi";
 import { TbPerfume } from "react-icons/tb";
@@ -17,6 +16,7 @@ import {
   addNewProductsData,
 } from "../../store/reducers/productSlice";
 import { useSearchParams } from "react-router-dom";
+import Modal from "../Modal";
 
 const buttonConfig = {
   beauty: { component: <GiLipstick size={20} />, color: "bg-pink-400" },
@@ -155,7 +155,7 @@ const CustomTab = () => {
             </svg>
           </button>
         </div>
-        <GenericModal
+        <Modal
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}
           inputs={inputs}

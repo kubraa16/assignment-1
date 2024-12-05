@@ -67,6 +67,10 @@ const updateProductList = (data, dispatch, getState) => {
   dispatch(setProductData(currProducts));
 };
 
+const deleteProduct = (data) => {
+  const state = getState();
+};
+
 export const fetchProductsData = createAsyncThunk(
   "products/fetchProductsData",
   async (params, { dispatch }) => {
@@ -104,6 +108,7 @@ export const addNewProductsData = createAsyncThunk(
         `https://dummyjson.com/products/add`,
         JSON.stringify(data)
       );
+      // console.log(response.data);
       if (response && response.data) {
         data.id = response.data.id;
         updateProductList(data, dispatch, getState);
@@ -126,6 +131,8 @@ export const updateProductsData = createAsyncThunk(
         `https://dummyjson.com/products/${data.id}`,
         JSON.stringify(data)
       );
+
+      console.log(response.data);
 
       if (response && response.data) {
         updateProductList(data, dispatch, getState);
