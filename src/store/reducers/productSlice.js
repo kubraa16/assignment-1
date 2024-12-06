@@ -50,6 +50,27 @@ const productsSlice = createSlice({
   },
 });
 
+const updateProductList = (data, dispatch, getState) => {
+  const state = getState();
+  const currProducts = [...state.products.products];
+  let found = false;
+  for (let i = 0; i < currProducts.length; i += 1) {
+    if (currProducts[i].id == data.id) {
+      currProducts[i] = data;
+      found = true;
+      break;
+    }
+  }
+  if (!found) {
+    currProducts.unshift(data);
+  }
+  dispatch(setProductData(currProducts));
+};
+
+const deleteProduct = (data) => {
+  const state = getState();
+};
+
 export const fetchProductsData = createAsyncThunk(
   "products/fetchProductsData",
   async (params, { dispatch }) => {
@@ -79,6 +100,53 @@ export const fetchProductsData = createAsyncThunk(
   }
 );
 
+export const addNewProductsData = createAsyncThunk(
+  "products/add",
+  async (data, { dispatch, getState }) => {
+    try {
+      const response = await axios.post(
+        `https://dummyjson.com/products/add`,
+        JSON.stringify(data)
+      );
+      // console.log(response.data);
+      if (response && response.data) {
+        data.id = response.data.id;
+        updateProductList(data, dispatch, getState);
+      } else {
+      }
+    } catch (err) {
+      console.error("Error adding product:", err);
+      dispatch(setError("An error occurred while adding product."));
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const updateProductsData = createAsyncThunk(
+  "products/update",
+  async (data, { dispatch, getState }) => {
+    try {
+      const response = await axios.put(
+        `https://dummyjson.com/products/${data.id}`,
+        JSON.stringify(data)
+      );
+
+      console.log(response.data);
+
+      if (response && response.data) {
+        updateProductList(data, dispatch, getState);
+      } else {
+      }
+    } catch (err) {
+      console.error("Error updating product:", err);
+      dispatch(setError("An error occurred while updating product."));
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+);
+
 export const fetchCategoryProducts = createAsyncThunk(
   "categoryProduct/fetchCategoryProducts",
   async (category, { dispatch }) => {
@@ -86,7 +154,7 @@ export const fetchCategoryProducts = createAsyncThunk(
       const response = await axios.get(
         `https://dummyjson.com/products/category/${category}`
       );
-
+      dispatch(setPage(1));
       dispatch(setProductData(response.data.products));
       dispatch(setHasMore(false));
 
